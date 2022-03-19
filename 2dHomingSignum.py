@@ -17,26 +17,23 @@ def odes(t, x):
     kAlpha = 2   # k > (v/Radius) = 2
    
     bearing = math.atan2((Ydes-Y),(Xdes-X)) 
+    relbearing = Alpha-bearing
+    relbearing = math.atan2(np.sin(relbearing), np.cos(relbearing))
+    
 
     # define each ODE
     dXdt = v*np.cos(Alpha) 
     dYdt = v*np.sin(Alpha)
-    diff = math.atan2(Alpha-bearing,1)
-    dAlphadt = -kAlpha*np.sign(diff)   #np.sign is signum function
+    dAlphadt = -kAlpha*np.sign(relbearing)   #np.sign is signum function
     #dAlphadt = -kAlpha*(Alpha-bearing)   
     
-    print(str(t)+" sec")
+    #print(str(t)+" sec")
     #print("t: "+str(t)+"; Alpha: "+str(Alpha)+"; Alpha_dot: "+str(dAlphadt))
-
+    #print("t: "+str(t)+"; Alpha_dot: "+str(dAlphadt))
     return [dXdt, dYdt, dAlphadt]
 
 # initial conditions
 x0 = [0, 0, 0]
-
-# test the defined odes
-print(odes(x=x0,t=0))
-
-print("Desired yaw: "+str(45.0*np.pi/180.0))
 
 # declare a time vector (time window)
 #t = np.linspace(0,1,100)
@@ -48,14 +45,14 @@ X = x[0]
 Y = x[1]
 Alpha = x[2]
 
-print(len(X))
-#print(X)
-#print(Y)
+
 #for i in range(len(X)):
-#    print(str(X(i))+", "+str(Y(i))+"\n")
+    #print(str(X[i])+", "+str(Y[i])+"\n")
+    #print(Alpha[i])
 
 
 t = sol.t
+print(t)
 
 # plot the results
 figure, axis = plt.subplots(2, 2)
