@@ -10,6 +10,7 @@ def odes(t, x):
     X = x[0]
     Y = x[1]
     Alpha = x[2]
+    Alpha = math.atan2(np.sin(Alpha),np.cos(Alpha))
    
     # Bearing already calculated previously
     
@@ -30,6 +31,7 @@ kAlpha = 2    # k > (v/Radius) = 2
 # parameters related to time
 simTime = 20 #sec
 sampleTime = 1 #sec
+iterPerSample = 10
 
 # initial conditions
 X_init = 0
